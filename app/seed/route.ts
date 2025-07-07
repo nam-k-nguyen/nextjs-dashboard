@@ -103,14 +103,16 @@ async function seedRevenue() {
 
 export async function GET() {
   try {
-    const result = await sql.begin((sql) => [
+    const result = await sql.begin((
+      // sql
+    ) => [
       seedUsers(),
       seedCustomers(),
       seedInvoices(),
       seedRevenue(),
     ]);
 
-    return Response.json({ message: 'Database seeded successfully' });
+    return Response.json({ message: 'Database seeded successfully', result }, { status: 200 });
   } catch (error) {
     return Response.json({ error }, { status: 500 });
   }
